@@ -46,7 +46,8 @@ class YouTubeDownloaderForCLI(YouTubeDownloader):
         bitrate: Bitrate = Bitrate.B128,
         album_artist: str = None,
         download_lyrics: bool = False,
-        progress_callback: Optional[callable] = None
+        progress_callback: Optional[callable] = None,
+        output_dir: Optional[Path] = None,
     ) -> tuple[Optional[Path], Optional[Track]]:
         """
         Download a single track with CLI progress support.
@@ -59,6 +60,7 @@ class YouTubeDownloaderForCLI(YouTubeDownloader):
             download_lyrics: Whether to download lyrics
             progress_callback: Optional function for progress reporting. 
                             Example: lambda idx, total, name: print(f"{idx}/{total} {name}")
+            output_dir: If provided, save directly in this directory (flat structure)
 
         Returns:
             tuple: (Downloaded file path, Updated track) or (None, None) on error
@@ -77,6 +79,7 @@ class YouTubeDownloaderForCLI(YouTubeDownloader):
                 download_lyrics=download_lyrics,
                 output_format=output_format,
                 bitrate=bitrate,
+                output_dir=output_dir,
             )
 
             if audio_path:
@@ -196,6 +199,7 @@ class YouTubeDownloaderForCLI(YouTubeDownloader):
                     output_format=output_format,
                     bitrate=bitrate,
                     download_lyrics=download_lyrics,
+                    output_dir=output_dir,
                 )
                 if updated_track:
                     success += 1

@@ -171,13 +171,15 @@ class YouTubeDownloader:
         track: Track,
         album_artist: str = None,
         output_format: AudioFormat = AudioFormat.M4A,
+        output_dir: Optional[Path] = None,
     ) -> Path:
-        """Generate output paths: Music/Artist/Album (Year)/Track.m4a.
+        """Generate output paths: Music/Artist/Album (Year)/Track.m4a or flat in output_dir.
 
         Args:
             track: Track object containing metadata
             album_artist: Artist name for album organization
             output_format: Audio format enum
+            output_dir: If provided, save directly in this directory (flat structure)
 
         Returns:
             Path: Complete file path where the track should be saved
@@ -186,12 +188,16 @@ class YouTubeDownloader:
             album_artist or track.artists[0] if track.artists else "Unknown Artist"
         )
         artist_name = self._sanitize_filename(artist_name)
-        album_name = self._sanitize_filename(track.album_name or "Unknown Album")
-        year = track.release_date[:4] if track.release_date else "Unknown"
-        dir_path = self.base_dir / artist_name / f"{album_name} ({year})"
+        track_name = self._sanitize_filename(track.name or "Unknown Track")
+
+        if output_dir:
+            dir_path = output_dir
+        else:
+            album_name = self._sanitize_filename(track.album_name or "Unknown Album")
+            year = track.release_date[:4] if track.release_date else "Unknown"
+            dir_path = self.base_dir / artist_name / f"{album_name} ({year})"
 
         dir_path.mkdir(parents=True, exist_ok=True)
-        track_name = self._sanitize_filename(track.name or "Unknown Track")
         return dir_path / f"{track.number} - {artist_name} - {track_name}.{output_format.value}"
 
     def _download_cover(self, track: Track) -> Optional[bytes]:
@@ -315,6 +321,7 @@ class YouTubeDownloader:
         bitrate: Bitrate = Bitrate.B128,
         album_artist: str = None,
         download_lyrics: bool = False,
+        output_dir: Optional[Path] = None,
     ) -> tuple[Optional[Path], Optional[Track]]:
         """Download a track from YouTube Music with Spotify metadata.
 
@@ -325,11 +332,12 @@ class YouTubeDownloader:
             download_lyrics: Whether to download lyrics
             output_format: Audio format enum (M4A, MP3, OPUS).
             bitrate: Audio bitrate enum (B96, B128, B192, B256).
+            output_dir: If provided, save directly in this directory (flat structure)
 
         Returns:
             tuple: (Downloaded file path, Updated track) or (None, None) on error
         """
-        output_path = self._get_output_path(track, album_artist, output_format)
+        output_path = self._get_output_path(track, album_artist, output_format, output_dir)
         yt_url = self.searcher.search_track(track)
         ydl_opts = self._get_ydl_opts(output_path, output_format, bitrate)
 
