@@ -2,15 +2,15 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![PyPI Version](https://img.shields.io/pypi/v/spotifysaver?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/spotifysaver/)
-[![Docker](https://img.shields.io/badge/Docker-Available-blue?logo=docker&logoColor=white)](https://github.com/gabrielbaute/spotify-saver/pkgs/container/spotify-saver)
-[![GitHub Container Registry](https://img.shields.io/badge/ghcr.io-Auto--Build-green?logo=github)](https://github.com/gabrielbaute/spotify-saver/pkgs/container/spotify-saver)
+[![Docker](https://img.shields.io/badge/Docker-Available-blue?logo=docker&logoColor=white)](https://github.com/SofianeHamlaoui/ReimuSpoty/pkgs/container/spotify-saver)
+[![GitHub Container Registry](https://img.shields.io/badge/ghcr.io-Auto--Build-green?logo=github)](https://github.com/SofianeHamlaoui/ReimuSpoty/pkgs/container/spotify-saver)
 [![FFmpeg](https://img.shields.io/badge/FFmpeg-Required-orange?logo=ffmpeg&logoColor=white)](https://ffmpeg.org/)
 [![yt-dlp](https://img.shields.io/badge/yt--dlp-2023.7.6%2B-red)](https://github.com/yt-dlp/yt-dlp)
 [![YouTube Music](https://img.shields.io/badge/YouTube_Music-API-yellow)](https://ytmusicapi.readthedocs.io/)
 [![Spotify](https://img.shields.io/badge/Spotify-API-1ED760?logo=spotify)](https://developer.spotify.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/gabrielbaute/spotify-saver)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/SofianeHamlaoui/ReimuSpoty)
 
 > ⚠️This repository is under a strong stage of development, expect constant changes. If you find any mistake or bug, please open an ISSUE.
 
@@ -40,12 +40,12 @@ Read this file in [Spanish](README_ES.md)
 
 ```bash
 # Installation with Poetry (recommended)
-git clone https://github.com/gabrielbaute/spotify-saver.git
+git clone https://github.com/SofianeHamlaoui/ReimuSpoty.git
 cd spotify-saver
 poetry install
 
 # Or with pip
-pip install git+https://github.com/gabrielbaute/spotify-saver.git
+pip install git+https://github.com/SofianeHamlaoui/ReimuSpoty.git
 ```
 
 ⚠️ IMPORTANT: You must log in to your Spotify account as a developer, create an app, and obtain a "client id" and "client secret." You must place this information in an .env file in the project's root directory.
@@ -76,7 +76,7 @@ You can also check the .example.env file
 
 ## 📚 Documentation
 
-We maintain a [documentation with Deepwiki](https://deepwiki.com/gabrielbaute/spotify-saver), which constantly tree the repository. You can consult it at all times.
+We maintain a [documentation with Deepwiki](https://deepwiki.com/SofianeHamlaoui/ReimuSpoty), which constantly tree the repository. You can consult it at all times.
 
 The **documentation for using the API**, on the other hand, can be found in this same repository here: [API Documentation](API_IMPLEMENTATION_SUMMARY.md)
 
@@ -205,7 +205,7 @@ docker compose up --build
 **Pull and run directly:**
 ```bash
 # Pull latest version
-docker pull ghcr.io/gabrielbaute/spotify-saver:latest
+docker pull ghcr.io/SofianeHamlaoui/ReimuSpoty:latest
 
 # Run container
 docker run -d \
@@ -215,7 +215,7 @@ docker run -d \
   -v ./config:/config \
   -e SPOTIFY_CLIENT_ID=your_client_id \
   -e SPOTIFY_CLIENT_SECRET=your_client_secret \
-  ghcr.io/gabrielbaute/spotify-saver:latest
+  ghcr.io/SofianeHamlaoui/ReimuSpoty:latest
 ```
 
 **Available tags:**
@@ -239,7 +239,7 @@ docker run -d \
 services:
   spotifysaver:
     container_name: spotifysaver
-    image: ghcr.io/gabrielbaute/spotify-saver:latest
+    image: ghcr.io/SofianeHamlaoui/ReimuSpoty:latest
     ports:
       - "${API_PORT:-8000}:8000"
     environment:
@@ -268,7 +268,7 @@ volumes:
 
 ```bash
 # Clone repository
-git clone https://github.com/gabrielbaute/spotify-saver.git
+git clone https://github.com/SofianeHamlaoui/ReimuSpoty.git
 cd spotify-saver
 
 # Build image
